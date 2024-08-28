@@ -4,13 +4,19 @@ import {
 	ConcurrentRoot,
 	DefaultEventPriority,
 } from "react-reconciler/constants.js"
-import { SingleChildWidget, type Widget } from "./widget.js"
+import {
+	MultiChildrenWidget,
+	SingleChildWidget,
+	type Widget,
+} from "./widget.js"
 import { TextWidget, type TextProps } from "./widget/text.js"
 import type { PolyApplication, Window } from "poly"
 import { ButtonWidget, type ButtonProps } from "./widget/button.js"
 import { CenterWidget, type CenterProps } from "./widget/center.js"
 import type { WidgetType } from "./widget/types.js"
 import type { ReactWindow } from "./react-window.js"
+import { RowWidget, type RowProps } from "./widget/row.js"
+import { ColumnWidget, type ColumnProps } from "./widget/column.js"
 
 const hostConfig: HostConfig<
 	WidgetType,
@@ -18,7 +24,7 @@ const hostConfig: HostConfig<
 	Window,
 	Widget,
 	TextWidget,
-	unknown,
+	Widget,
 	unknown,
 	Widget,
 	PolyApplication,
@@ -46,7 +52,6 @@ const hostConfig: HostConfig<
 					props as ButtonProps,
 				)
 				break
-
 			case "text":
 				instance = new TextWidget(
 					hostContext,
@@ -54,11 +59,19 @@ const hostConfig: HostConfig<
 					props as TextProps,
 				)
 				break
-
 			case "center":
-				const centerProps = props as CenterProps
 				instance = new CenterWidget(hostContext, widgetTag)
 				break
+			case "row": {
+				const rowProps = props as RowProps
+				instance = new RowWidget(hostContext, widgetTag, rowProps)
+				break
+			}
+			case "column": {
+				const colProps = props as ColumnProps
+				instance = new ColumnWidget(hostContext, widgetTag, colProps)
+				break
+			}
 		}
 
 		return instance
@@ -78,17 +91,45 @@ const hostConfig: HostConfig<
 	appendInitialChild(parentInstance, child): void {
 		if (parentInstance instanceof SingleChildWidget) {
 			parentInstance.child = child
+		} else if (parentInstance instanceof MultiChildrenWidget) {
+			parentInstance.children.append(child)
 		}
 	},
 
 	appendChild(parentInstance, child) {
 		if (parentInstance instanceof SingleChildWidget) {
 			parentInstance.child = child
+		} else if (parentInstance instanceof MultiChildrenWidget) {
 		}
 	},
 
 	appendChildToContainer(container, child) {
 		container.showContent(child.descriptor())
+	},
+
+	insertBefore(parentInstance, child, beforeChild) {
+		if (!(parentInstance instanceof MultiChildrenWidget)) {
+			return
+		}
+		parentInstance.context.nativeLayer.insertWidgetBefore(
+			child.descriptor(),
+			beforeChild.descriptor(),
+			parentInstance.tag,
+		)
+	},
+
+	insertInContainerBefore(container, child, beforeChild) {
+		throw new Error("insertInContainerBefore not supported.")
+	},
+
+	removeChild(parentInstance, child) {
+		if (parentInstance instanceof SingleChildWidget) {
+			parentInstance.removeChild(child)
+		}
+	},
+
+	removeChildFromContainer(container, child) {
+		container.clearContent()
 	},
 
 	finalizeInitialChildren(
@@ -109,7 +150,7 @@ const hostConfig: HostConfig<
 		rootContainer,
 		hostContext,
 	): unknown {
-		return false
+		return newProps
 	},
 
 	shouldSetTextContent(type, props): boolean {
