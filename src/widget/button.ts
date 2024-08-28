@@ -1,8 +1,8 @@
 import React from "react"
 import type { PolyApplication, CallbackHandle } from "poly"
 import { RpcMessageButton, type RpcMessageWidget } from "poly/rpc"
-import { Widget } from "../widget"
-import { createReactElement } from "./react"
+import { Widget } from "../widget.js"
+import { createReactElement } from "./react.js"
 
 type ButtonOnClickCallback = () => void
 

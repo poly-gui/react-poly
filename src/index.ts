@@ -1,4 +1,4 @@
-export * from "./reconciler"
+export * from "./reconciler.js"
 export * from "./react-window.js"
 export * from "./widget.js"
 export * from "./widget/button.js"

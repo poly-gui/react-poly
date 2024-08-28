@@ -2,6 +2,16 @@
 	"name": "@poly-gui/react",
 	"module": "src/index.ts",
 	"type": "module",
+	"files": ["dist", "LICENSE", "README.md", "package.json"],
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		}
+	},
+	"scripts": {
+		"build": "tsc"
+	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.8.3",
 		"@types/bun": "latest",

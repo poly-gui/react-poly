@@ -4,9 +4,9 @@ import {
 	RpcMessageText,
 	type RpcMessageWidget,
 } from "poly/rpc"
-import { Widget } from "../widget"
-import type { FontStyle } from "./font-style"
-import { createReactElement } from "./react"
+import { Widget } from "../widget.js"
+import type { FontStyle } from "./font-style.js"
+import { createReactElement } from "./react.js"
 
 interface TextProps {
 	content: string

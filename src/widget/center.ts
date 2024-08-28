@@ -1,6 +1,8 @@
+import React from "react"
 import { RpcMessageCenter, type RpcMessageWidget } from "poly/rpc"
-import { SingleChildWidget } from "../widget"
-import { createReactElement } from "./react"
+import { SingleChildWidget } from "../widget.js"
+
+interface CenterProps extends React.PropsWithChildren {}
 
 class CenterWidget extends SingleChildWidget<Record<string, never>> {
 	update(props: Record<string, never>): void {}
@@ -13,8 +15,9 @@ class CenterWidget extends SingleChildWidget<Record<string, never>> {
 	}
 }
 
-function Center({ children }: React.PropsWithChildren<Record<string, never>>) {
-	return createReactElement("center", {}, children)
+function Center(props: CenterProps) {
+	return React.createElement("center", null, props.children)
 }
 
 export { Center, CenterWidget }
+export type { CenterProps }

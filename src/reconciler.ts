@@ -1,16 +1,16 @@
+import ReactReconciler from "react-reconciler"
 import type { Fiber, HostConfig } from "react-reconciler"
 import {
 	ConcurrentRoot,
 	DefaultEventPriority,
-} from "react-reconciler/constants"
-import { SingleChildWidget, type Widget, type WidgetProps } from "./widget"
-import { TextWidget, type TextProps } from "./widget/text"
+} from "react-reconciler/constants.js"
+import { SingleChildWidget, type Widget } from "./widget.js"
+import { TextWidget, type TextProps } from "./widget/text.js"
 import type { PolyApplication, Window } from "poly"
-import { ButtonWidget, type ButtonProps } from "./widget/button"
-import ReactReconciler from "react-reconciler"
-import { CenterWidget } from "./widget/center"
-import type { WidgetType } from "./widget/types"
-import type { ReactWindow } from "./react-window"
+import { ButtonWidget, type ButtonProps } from "./widget/button.js"
+import { CenterWidget, type CenterProps } from "./widget/center.js"
+import type { WidgetType } from "./widget/types.js"
+import type { ReactWindow } from "./react-window.js"
 
 const hostConfig: HostConfig<
 	WidgetType,
@@ -27,7 +27,7 @@ const hostConfig: HostConfig<
 	ReturnType<typeof setTimeout>,
 	number
 > = {
-	supportsMutation: false,
+	supportsMutation: true,
 	supportsPersistence: false,
 	supportsHydration: false,
 	isPrimaryRenderer: false,
@@ -56,6 +56,7 @@ const hostConfig: HostConfig<
 				break
 
 			case "center":
+				const centerProps = props as CenterProps
 				instance = new CenterWidget(hostContext, widgetTag)
 				break
 		}
@@ -112,7 +113,7 @@ const hostConfig: HostConfig<
 	},
 
 	shouldSetTextContent(type, props): boolean {
-		return true
+		return false
 	},
 
 	getRootHostContext(rootContainer): PolyApplication | null {
@@ -144,6 +145,10 @@ const hostConfig: HostConfig<
 
 	commitTextUpdate(textInstance, oldText, newText) {
 		textInstance.update({ content: newText })
+	},
+
+	clearContainer(container) {
+		container.clearContent()
 	},
 
 	resetAfterCommit(containerInfo): void {},
