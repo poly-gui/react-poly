@@ -1,4 +1,4 @@
-import { Window } from "poly"
+import { Window } from "@poly-gui/core"
 import type { OpaqueRoot } from "react-reconciler"
 
 class ReactWindow extends Window {

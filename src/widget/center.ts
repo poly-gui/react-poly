@@ -1,5 +1,6 @@
 import React from "react"
-import { RpcMessageCenter, type RpcMessageWidget } from "poly/rpc"
+import { Center as RpcMessageCenter } from "@poly-gui/core/rpc/widget/center.np.js"
+import type { Widget as RpcMessageWidget } from "@poly-gui/core/rpc/widget/widget.np.js"
 import { SingleChildWidget, type Widget } from "../widget.js"
 
 interface CenterProps extends React.PropsWithChildren {}

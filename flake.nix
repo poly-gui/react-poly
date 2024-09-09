@@ -1,5 +1,5 @@
 {
-  description = "my website";
+  description = "React implementation of Poly";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs?tag=24.05";

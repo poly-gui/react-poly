@@ -1,5 +1,5 @@
-import type { PolyApplication } from "poly"
-import type { RpcMessageWidget } from "poly/rpc"
+import type { PolyApplication } from "@poly-gui/core"
+import type { Widget as RpcMessageWidget } from "@poly-gui/core/rpc/widget/widget.np.js"
 import { LinkedList } from "./util/linked-list.js"
 
 interface WidgetProps {

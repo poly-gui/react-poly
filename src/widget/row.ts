@@ -1,7 +1,8 @@
-import { type RpcMessageWidget, RpcMessageRow } from "poly/rpc"
+import type { PolyApplication } from "@poly-gui/core"
+import { Row as RpcMessageRow } from "@poly-gui/core/rpc/widget/row.np.js"
+import type { Widget as RpcMessageWidget } from "@poly-gui/core/rpc/widget/widget.np.js"
 import { MultiChildrenWidget } from "../widget.js"
 import { Alignment, LayoutParams } from "./layout.js"
-import type { PolyApplication } from "poly"
 import { createReactElement } from "./react.js"
 
 interface RowProps {

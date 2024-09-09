@@ -1,22 +1,22 @@
+import type { PolyApplication, Window } from "@poly-gui/core"
 import ReactReconciler from "react-reconciler"
 import type { Fiber, HostConfig } from "react-reconciler"
 import {
 	ConcurrentRoot,
 	DefaultEventPriority,
 } from "react-reconciler/constants.js"
+import type { ReactWindow } from "./react-window.js"
 import {
 	MultiChildrenWidget,
 	SingleChildWidget,
 	type Widget,
 } from "./widget.js"
-import { TextWidget, type TextProps } from "./widget/text.js"
-import type { PolyApplication, Window } from "poly"
-import { ButtonWidget, type ButtonProps } from "./widget/button.js"
-import { CenterWidget, type CenterProps } from "./widget/center.js"
+import { type ButtonProps, ButtonWidget } from "./widget/button.js"
+import { type CenterProps, CenterWidget } from "./widget/center.js"
+import { type ColumnProps, ColumnWidget } from "./widget/column.js"
+import { type RowProps, RowWidget } from "./widget/row.js"
+import { type TextProps, TextWidget } from "./widget/text.js"
 import type { WidgetType } from "./widget/types.js"
-import type { ReactWindow } from "./react-window.js"
-import { RowWidget, type RowProps } from "./widget/row.js"
-import { ColumnWidget, type ColumnProps } from "./widget/column.js"
 
 const hostConfig: HostConfig<
 	WidgetType,

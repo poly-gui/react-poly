@@ -1,9 +1,7 @@
-import type { PolyApplication } from "poly"
-import {
-	RpcMessageFontStyle,
-	RpcMessageText,
-	type RpcMessageWidget,
-} from "poly/rpc"
+import type { PolyApplication } from "@poly-gui/core"
+import { Text as RpcMessageText } from "@poly-gui/core/rpc/widget/text.np.js"
+import { FontStyle as RpcMessageFontStyle } from "@poly-gui/core/rpc/widget/font-style.np.js"
+import type { Widget as RpcMessageWidget } from "@poly-gui/core/rpc/widget/widget.np.js"
 import { Widget } from "../widget.js"
 import type { FontStyle } from "./font-style.js"
 import { createReactElement } from "./react.js"

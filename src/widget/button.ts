@@ -1,6 +1,6 @@
-import React from "react"
-import type { PolyApplication, CallbackHandle } from "poly"
-import { RpcMessageButton, type RpcMessageWidget } from "poly/rpc"
+import type { PolyApplication, CallbackHandle } from "@poly-gui/core"
+import { Button as RpcMessageButton } from "@poly-gui/core/rpc/widget/button.np.js"
+import type { Widget as RpcMessageWidget } from "@poly-gui/core/rpc/widget/widget.np.js"
 import { Widget } from "../widget.js"
 import { createReactElement } from "./react.js"
 
